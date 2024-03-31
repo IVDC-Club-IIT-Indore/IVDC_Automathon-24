@@ -84,11 +84,8 @@ print(P_est[1])
 
 # Wraps angle to (-pi,pi] range
 def wraptopi(x):
-    if x > np.pi:
-        x = x - (np.floor(x / (2 * np.pi)) + 1) * 2 * np.pi
-    elif x < -np.pi:
-        x = x + (np.floor(x / (-2 * np.pi)) + 1) * 2 * np.pi
-    return x
+    # Add your code here !
+
 
 
 
@@ -157,40 +154,32 @@ for k in range(1, len(t)):  # start at 1 because we've set the initial predicito
 
     # 1. Update state with odometry readings (remember to wrap the angles to [-pi,pi])
 #     x_check = np.zeros(3)
-    F = np.array([[np.cos(theta), 0, -np.sin(theta)*delta_t*v[k-1]],
-              [np.sin(theta), 0, np.cos(theta)*delta_t*v[k-1]],
-              [0, 1, 0]], dtype='float')
-    inp = np.array([[v[k-1]], [om[k-1]], [0]])
-
-    x_check = x_check + np.dot(F, inp) * delta_t
-    x_check[2] = wraptopi(x_check[2])
+    
+    # Add your code here !
 
     # 2. Motion model jacobian with respect to last state
-    F_km = np.zeros([3, 3])
-    F_km = np.array([[1, 0, -np.sin(theta)*delta_t*v[k-1]],
-                 [0, 1, np.cos(theta)*delta_t*v[k-1]],
-                 [0, 0, 1]], dtype='float')
+    
+    # Add your code here !
+    
     # dtype='float'
 
     # 3. Motion model jacobian with respect to noise
-    L_km = np.zeros([3, 2])
-    L_km = np.array([[np.cos(theta)*delta_t, 0], 
-                 [np.sin(theta)*delta_t, 0],
-                 [0, delta_t]], dtype='float')
+   
+    # Add your code here !
 
+    
     # 4. Propagate uncertainty
-    P_check = F_km.dot(P_check.dot(F_km.T)) + L_km.dot(Q_km.dot(L_km.T)) 
+   
+    # Add your code here !
 
      # 5. Update state estimate using available landmark measurements
-    for i in range(len(r[k])):
-        x_check, P_check = measurement_update(l[i], r[k, i], b[k, i], P_check, x_check)
+    
+
+    # Add your code here !
 
     # Set final state predictions for timestep
-    x_est[k, 0] = x_check[0]
-    x_est[k, 1] = x_check[1]
-    x_est[k, 2] = x_check[2]
-    P_est[k, :, :] = P_check
-
+   
+    # Add your code here !
 
 
 ## Plot the resulting state estimates:
@@ -213,5 +202,8 @@ plt.show()
 plt.close() 
 
 
-with open(r'C:\Users\arjun\OneDrive\Desktop\EKF\submission.pkl', 'wb') as f:
-    pickle.dump(x_est, f, pickle.HIGHEST_PROTOCOL)
+# Store the final results in a submission.pkl file !
+# If no such file exists, create one and dump the values into it.
+
+
+# Add your code here ! 
